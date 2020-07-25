@@ -3,6 +3,7 @@ A quick record-playback background program for audio clips
 
 
 Set the output device to a virtual cable driver to use clips as input.
+-1 is default output device
 
 Recording:
 - Press num0 to enter record mode
