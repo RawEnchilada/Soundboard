@@ -72,7 +72,25 @@ namespace Soundboard_forms
             Boolean Registered6 = RegisterHotKey(
                 this.Handle, UniqueHotkeyId6, 0x0000, HotKeyCode6
             );
-            
+
+            int UniqueHotkeyId7 = 7;
+            int HotKeyCode7 = (int)Keys.NumPad7;
+            Boolean Registered7 = RegisterHotKey(
+                this.Handle, UniqueHotkeyId7, 0x0000, HotKeyCode7
+            );
+
+            int UniqueHotkeyId8 = 8;
+            int HotKeyCode8 = (int)Keys.NumPad8;
+            Boolean Registered8 = RegisterHotKey(
+                this.Handle, UniqueHotkeyId8, 0x0000, HotKeyCode8
+            );
+
+            int UniqueHotkeyId9 = 9;
+            int HotKeyCode9 = (int)Keys.NumPad9;
+            Boolean Registered9 = RegisterHotKey(
+                this.Handle, UniqueHotkeyId9, 0x0000, HotKeyCode9
+            );
+
 
         }
 
@@ -115,6 +133,18 @@ namespace Soundboard_forms
                     case 6:
                         if (recordMode) Program.audio.startRecording(6);
                         else Program.audio.startPlaying(6);
+                        break;
+                    case 7:
+                        if (recordMode) Program.audio.startRecording(7);
+                        else Program.audio.startPlaying(7);
+                        break;
+                    case 8:
+                        if (recordMode) Program.audio.startRecording(8);
+                        else Program.audio.startPlaying(8);
+                        break;
+                    case 9:
+                        if (recordMode) Program.audio.startRecording(9);
+                        else Program.audio.startPlaying(9);
                         break;
                 }
             }

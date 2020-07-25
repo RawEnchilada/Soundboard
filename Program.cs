@@ -83,6 +83,12 @@ namespace Soundboard_forms
         public void startPlaying(int num)
         {
             if(!File.Exists(Application.StartupPath+'\\'+num + ".wav"))return;
+
+            if(player.PlaybackState == PlaybackState.Playing)
+            {
+                player.Stop();
+            }
+
             Console.WriteLine(" Begin playback of " + num + ".wav");
 
             // set up playback
@@ -90,9 +96,7 @@ namespace Soundboard_forms
             player = new WaveOutEvent();
             player.DeviceNumber = device;
             player.Volume = volume/100;
-            player.Init(audioFile);
-
-            
+            player.Init(audioFile);            
 
             // begin playback
             player.Play();
