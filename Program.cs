@@ -84,7 +84,7 @@ namespace Soundboard_forms
         {
             if(!File.Exists(Application.StartupPath+'\\'+num + ".wav"))return;
 
-            if(player.PlaybackState == PlaybackState.Playing)
+            if(player != null && player.PlaybackState == PlaybackState.Playing)
             {
                 player.Stop();
             }
