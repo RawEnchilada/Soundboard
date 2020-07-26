@@ -38,8 +38,7 @@ namespace Soundboard_forms
     {
         public bool recording { get; private set; }
         public int device = 1; ///set device to play on
-        public float volume = 1.0f;
-        public WaveOutEvent player;
+        public float volume = 50f;
         WasapiLoopbackCapture capture;
         WaveFileWriter writer;
 
@@ -75,6 +74,7 @@ namespace Soundboard_forms
         public void stopRecording()
         {
             Console.WriteLine(" Stopping recording.");
+            Form1.window.radioButton1.Checked = Form1.recordMode = false;              
             capture.StopRecording();
         }
 
@@ -84,16 +84,26 @@ namespace Soundboard_forms
         {
             if(!File.Exists(Application.StartupPath+'\\'+num + ".wav"))return;
 
-            if(player != null && player.PlaybackState == PlaybackState.Playing)
-            {
-                player.Stop();
-            }
-
             Console.WriteLine(" Begin playback of " + num + ".wav");
-
-            // set up playback
+            
             var audioFile = new AudioFileReader(num + ".wav");
-            player = new WaveOutEvent();
+
+            if(device != -1){
+                var audioFile2 = new AudioFileReader(num + ".wav");
+                var player2 = new WaveOutEvent();
+                player2.DeviceNumber = -1;
+                player2.Volume = volume/100;
+                player2.Init(audioFile2);            
+
+                // begin playback
+                player2.Play();
+
+                player2.PlaybackStopped += (s, a) => {
+                    if (audioFile != null) audioFile.Dispose();
+                    audioFile = null;
+                };
+            }
+            var player = new WaveOutEvent();
             player.DeviceNumber = device;
             player.Volume = volume/100;
             player.Init(audioFile);            
@@ -103,8 +113,6 @@ namespace Soundboard_forms
 
             player.PlaybackStopped += (s, a) => {
                 Console.WriteLine(" Playback ended");
-                if (player != null) player.Dispose();
-                player = null;
                 if (audioFile != null) audioFile.Dispose();
                 audioFile = null;
             };

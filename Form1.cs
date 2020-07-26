@@ -94,7 +94,7 @@ namespace Soundboard_forms
 
         }
 
-        static bool recordMode = false;
+        public static bool recordMode = false;
 
         protected override void WndProc(ref Message m)
         {
@@ -103,46 +103,86 @@ namespace Soundboard_forms
             {
                 int id = m.WParam.ToInt32();
 
+                
+
                 switch (id)
                 {
-                    case 0:
-                        if (Program.audio.recording) Program.audio.stopRecording();
-                        recordMode = !recordMode;
-                        radioButton1.Checked = recordMode;
+                    case 0:    
+                        if (Program.audio.recording) {
+                            Program.audio.stopRecording();
+                            break;
+                        }                  
+                        radioButton1.Checked = recordMode = true;                        
                         break;
                     case 1:
+                        if (Program.audio.recording) {
+                            Program.audio.stopRecording();
+                            break;
+                        } 
                         if (recordMode) Program.audio.startRecording(1);
                         else Program.audio.startPlaying(1);
                         break;
                     case 2:
+                        if (Program.audio.recording) {
+                            Program.audio.stopRecording();
+                            break;
+                        } 
                         if (recordMode) Program.audio.startRecording(2);
                         else Program.audio.startPlaying(2);
                         break;
                     case 3:
+                        if (Program.audio.recording) {
+                            Program.audio.stopRecording();
+                            break;
+                        } 
                         if (recordMode) Program.audio.startRecording(3);
                         else Program.audio.startPlaying(3);
                         break;
                     case 4:
+                        if (Program.audio.recording) {
+                            Program.audio.stopRecording();
+                            break;
+                        } 
                         if (recordMode) Program.audio.startRecording(4);
                         else Program.audio.startPlaying(4);
                         break;
                     case 5:
+                        if (Program.audio.recording) {
+                            Program.audio.stopRecording();
+                            break;
+                        } 
                         if (recordMode) Program.audio.startRecording(5);
                         else Program.audio.startPlaying(5);
                         break;
                     case 6:
+                        if (Program.audio.recording) {
+                            Program.audio.stopRecording();
+                            break;
+                        } 
                         if (recordMode) Program.audio.startRecording(6);
                         else Program.audio.startPlaying(6);
                         break;
                     case 7:
+                        if (Program.audio.recording) {
+                            Program.audio.stopRecording();
+                            break;
+                        } 
                         if (recordMode) Program.audio.startRecording(7);
                         else Program.audio.startPlaying(7);
                         break;
                     case 8:
+                        if (Program.audio.recording) {
+                            Program.audio.stopRecording();
+                            break;
+                        } 
                         if (recordMode) Program.audio.startRecording(8);
                         else Program.audio.startPlaying(8);
                         break;
                     case 9:
+                        if (Program.audio.recording) {
+                            Program.audio.stopRecording();
+                            break;
+                        } 
                         if (recordMode) Program.audio.startRecording(9);
                         else Program.audio.startPlaying(9);
                         break;
