@@ -48,7 +48,14 @@ namespace Soundboard_forms
         {
             Console.WriteLine("Recording to "+num+".wav");
             capture = new WasapiLoopbackCapture();
-            writer = new WaveFileWriter(num + ".wav", capture.WaveFormat);
+            try
+            {
+                writer = new WaveFileWriter(num + ".wav", capture.WaveFormat);
+            }
+            catch (IOException){
+                stopRecording();
+                return;
+            }
             capture.StartRecording();
             recording = true;
             capture.DataAvailable += (s, a) =>
