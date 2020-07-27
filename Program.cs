@@ -42,7 +42,7 @@ namespace Soundboard_forms
         WasapiLoopbackCapture capture;
         WaveFileWriter writer;
 
-        
+
 
         public void startRecording(int num)
         {
@@ -58,6 +58,7 @@ namespace Soundboard_forms
             }
             capture.StartRecording();
             recording = true;
+
             capture.DataAvailable += (s, a) =>
             {
                 writer.Write(a.Buffer, 0, a.BytesRecorded);
@@ -65,11 +66,9 @@ namespace Soundboard_forms
                 {
                     capture.StopRecording();
                     Console.WriteLine(" Recording is over 20 seconds");
-                    if(writer != null){
+                    if(capture != null){
                         writer.Dispose();
                         writer = null;
-                    }
-                    if(capture != null){
                         capture.Dispose();
                         capture = null;
                     }       
@@ -79,11 +78,10 @@ namespace Soundboard_forms
 
             capture.RecordingStopped += (s, a) =>
             {
-                if(writer != null){
+                if(capture != null)
+                {
                     writer.Dispose();
                     writer = null;
-                }
-                if(capture != null){
                     capture.Dispose();
                     capture = null;
                 }
@@ -95,14 +93,6 @@ namespace Soundboard_forms
             Console.WriteLine(" Stopping recording.");
             Form1.window.radioButton1.Checked = Form1.recordMode = false;              
             capture.StopRecording();
-            if(writer != null){
-                writer.Dispose();
-                writer = null;
-            }
-            if(capture != null){
-                capture.Dispose();
-                capture = null;
-            }
             recording = false;
         }
 
@@ -129,6 +119,7 @@ namespace Soundboard_forms
                 player2.PlaybackStopped += (s, a) => {
                     if (audioFile != null) audioFile.Dispose();
                     audioFile = null;
+                    player2.Dispose();
                 };
             }
             var player = new WaveOutEvent();
@@ -143,6 +134,7 @@ namespace Soundboard_forms
                 Console.WriteLine(" Playback ended");
                 if (audioFile != null) audioFile.Dispose();
                 audioFile = null;
+                player.Dispose();
             };
             
         }
