@@ -58,16 +58,28 @@ namespace Soundboard_forms
                 {
                     capture.StopRecording();
                     Console.WriteLine(" Recording is over 20 seconds");
+                    if(writer != null){
+                        writer.Dispose();
+                        writer = null;
+                    }
+                    if(capture != null){
+                        capture.Dispose();
+                        capture = null;
+                    }       
                     recording = false;
                 }
             };
 
             capture.RecordingStopped += (s, a) =>
             {
-                writer.Dispose();
-                writer = null;
-                capture.Dispose();
-                capture = null;
+                if(writer != null){
+                    writer.Dispose();
+                    writer = null;
+                }
+                if(capture != null){
+                    capture.Dispose();
+                    capture = null;
+                }
                 recording = false;
             };
         }
@@ -76,6 +88,15 @@ namespace Soundboard_forms
             Console.WriteLine(" Stopping recording.");
             Form1.window.radioButton1.Checked = Form1.recordMode = false;              
             capture.StopRecording();
+            if(writer != null){
+                writer.Dispose();
+                writer = null;
+            }
+            if(capture != null){
+                capture.Dispose();
+                capture = null;
+            }
+            recording = false;
         }
 
 
